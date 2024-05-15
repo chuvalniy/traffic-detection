@@ -1,0 +1,3 @@
+video_reader:
+  src: ../data/traffic_0.mp4
+  skip_secs: 0

@@ -3,8 +3,8 @@ from typing import Generator
 import logging
 import cv2
 
-from elements.VideoEndBreakElement import VideoEndBreakElement
-from elements.FrameElement import FrameElement
+from elements.video_end_break_element import VideoEndBreakElement
+from elements.frame_element import FrameElement
 
 logger = logging.getLogger(__name__)
 
@@ -29,7 +29,6 @@ class VideoReader:
 
         while True:
             success, frame = self.stream.read()
-
             if not success:
                 logger.warning("Can't receive frame. Exiting ...")
 
@@ -46,7 +45,7 @@ class VideoReader:
                 else self.last_frame_timestamp + 0.1
             )
 
-            if abs(self.last_frame_timestamp - timestamp) > self.skip_secs:
+            if abs(self.last_frame_timestamp - timestamp) < self.skip_secs:
                 continue
 
             self.last_frame_timestamp = timestamp

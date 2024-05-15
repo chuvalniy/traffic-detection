@@ -1,4 +1,4 @@
-from elements.FrameElement import FrameElement
+from elements.frame_element import FrameElement
 
 
 class VideoEndBreakElement(FrameElement):
