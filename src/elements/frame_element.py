@@ -13,3 +13,7 @@ class FrameElement:
         self.frame = frame
         self.timestamp = timestamp
         self.frame_num = frame_num
+
+        self.conf = []
+        self.xyxy = []
+        self.cls = []

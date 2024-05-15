@@ -1,5 +1,9 @@
 import hydra
-from nodes import VideoReader, ShowNode
+from nodes import (
+    VideoReader,
+    ShowNode,
+    DetectionNode
+)
 import cv2
 
 
@@ -7,8 +11,10 @@ import cv2
 def main(config) -> None:
     video_reader = VideoReader(config['video_reader'])
     show_node = ShowNode(config['show_node'])
+    detection_node = DetectionNode(config['detection_node'])
 
     for frame_element in video_reader.process():
+        frame_element = detection_node.process(frame_element)
         frame_element = show_node.process(frame_element)
 
 

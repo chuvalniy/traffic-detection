@@ -4,3 +4,8 @@ video_reader:
 
 show_node:
   imshow: True
+  show_detections: True
+
+detection_node:
+  device: 'cuda'
+  model_path: '../artifacts/yolov8n.pt'
