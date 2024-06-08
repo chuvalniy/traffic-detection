@@ -4,8 +4,15 @@ video_reader:
 
 show_node:
   imshow: True
-  show_detections: True
+  show_detection: True
+  show_tracking: True
 
 detection_node:
   device: 'cuda'
   model_path: '../artifacts/yolov8n.pt'
+
+tracking_node:
+  first_track_thresh: 0.5
+  second_track_thresh: 0.10
+  match_thresh: 0.95
+  track_buffer: 256

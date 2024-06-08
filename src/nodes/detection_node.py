@@ -19,12 +19,15 @@ class DetectionNode:
     def process(self, frame_element: FrameElement) -> FrameElement:
         if isinstance(frame_element, VideoEndBreakElement):
             return frame_element
+        assert isinstance(
+            frame_element, FrameElement
+        ), f"DetectionNode | Неправильный формат входного элемента {type(frame_element)}"
 
         frame = frame_element.frame.copy()
 
         results = self.model.predict(frame, verbose=False)
 
-        frame_element.conf = results[0].boxes.conf.cpu().int().tolist()
+        frame_element.conf = results[0].boxes.conf.cpu().tolist()
         frame_element.xyxy = results[0].boxes.xyxy.cpu().int().tolist()
 
         num_classes = results[0].boxes.cls.cpu().int().tolist()
