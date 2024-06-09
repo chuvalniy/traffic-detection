@@ -4,8 +4,9 @@ video_reader:
 
 show_node:
   imshow: True
-  show_detection: True
+  show_detection: False
   show_tracking: True
+  snow_analytics: True
 
 detection_node:
   device: 'cuda'

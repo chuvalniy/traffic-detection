@@ -14,6 +14,7 @@ class FrameElement:
             timestamp: float,
             frame_num: float,
             buffer_tracks: dict = None,
+            info: dict = None,
             id_list: Optional[list] = None,
             tracked_conf: Optional[list] = None,
             tracked_cls: Optional[list] = None,
@@ -35,4 +36,6 @@ class FrameElement:
         self.tracked_cls = tracked_cls
         self.tracked_xyxy = tracked_xyxy
 
+        # Activity
         self.buffer_tracks = buffer_tracks
+        self.info = info

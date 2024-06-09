@@ -42,6 +42,6 @@ class TrackManagerNode:
         for key in keys_to_remove:
             self.buffer.pop(key)
 
-        frame_element.buffer_track = self.buffer
+        frame_element.buffer_tracks = self.buffer
 
         return frame_element
