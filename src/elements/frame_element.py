@@ -13,6 +13,7 @@ class FrameElement:
             frame: np.ndarray,
             timestamp: float,
             frame_num: float,
+            buffer_tracks: dict = None,
             id_list: Optional[list] = None,
             tracked_conf: Optional[list] = None,
             tracked_cls: Optional[list] = None,
@@ -33,3 +34,5 @@ class FrameElement:
         self.tracked_conf = tracked_conf
         self.tracked_cls = tracked_cls
         self.tracked_xyxy = tracked_xyxy
+
+        self.buffer_tracks = buffer_tracks

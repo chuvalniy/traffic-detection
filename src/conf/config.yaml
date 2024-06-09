@@ -16,3 +16,8 @@ tracking_node:
   second_track_thresh: 0.10
   match_thresh: 0.95
   track_buffer: 256
+
+track_manager_node:
+  buffer_analytics: 0.5
+  min_lifetime_track: 3
+  count_cars_buffer_frames: 25
