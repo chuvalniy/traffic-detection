@@ -3,7 +3,9 @@ from nodes import (
     VideoReader,
     ShowNode,
     DetectionNode,
-    TrackingNode
+    TrackingNode,
+    TrackManagerNode,
+    AnalyticsNode
 )
 
 
@@ -13,10 +15,14 @@ def main(config) -> None:
     show_node = ShowNode(config['show_node'])
     detection_node = DetectionNode(config['detection_node'])
     tracking_node = TrackingNode(config['tracking_node'])
+    track_manager_node = TrackManagerNode(config['track_manager_node'])
+    analytics_node = AnalyticsNode()
 
     for frame_element in video_reader.process():
         frame_element = detection_node.process(frame_element)
         frame_element = tracking_node.process(frame_element)
+        frame_element = track_manager_node.process(frame_element)
+        frame_element = analytics_node.process(frame_element)
         frame_element = show_node.process(frame_element)
 
 

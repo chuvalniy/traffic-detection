@@ -1,4 +1,5 @@
 import cv2
+import numpy as np
 
 from elements.frame_element import FrameElement
 from elements.video_end_break_element import VideoEndBreakElement
@@ -9,6 +10,7 @@ class ShowNode:
         self.imshow = config['imshow']
         self.show_detection = config['show_detection']
         self.show_tracking = config['show_tracking']
+        self.show_analytics = config['snow_analytics']
 
         # Параметры для шрифтов:
         self.fontFace = 1
@@ -42,6 +44,23 @@ class ShowNode:
                 x1, y1, x2, y2 = bbox
 
                 cv2.rectangle(frame_result, (x1, y1), (x2, y2), (127, 127, 127), 3)
+
+        if self.show_analytics:
+            info = frame_element.info
+
+            n_objects_text = f"Objects amount: {info['n_objects']}"
+
+            y = 55
+            # Выводим текст для количества машин
+            cv2.putText(
+                frame_result,
+                text=n_objects_text,
+                org=(20, y),
+                fontFace=self.fontFace,
+                fontScale=self.fontScale*1.5,
+                thickness=self.thickness,
+                color=(255, 255, 255),
+            )
 
         if self.imshow:
             cv2.imshow(frame_element.source, frame_result)

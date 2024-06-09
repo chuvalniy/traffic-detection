@@ -1,5 +1,0 @@
-video_reader:
-  src: traffic_0.mp4
-  skip_secs: 0
-show_node:
-  imshow: true
