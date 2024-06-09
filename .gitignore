@@ -2,3 +2,4 @@ data
 .idea
 artifacts
 runs
+/src/outputs/
