@@ -16,7 +16,7 @@ def main(config) -> None:
     detection_node = DetectionNode(config['detection_node'])
     tracking_node = TrackingNode(config['tracking_node'])
     track_manager_node = TrackManagerNode(config['track_manager_node'])
-    analytics_node = AnalyticsNode()
+    analytics_node = AnalyticsNode(config['analytics_node'])
 
     for frame_element in video_reader.process():
         frame_element = detection_node.process(frame_element)

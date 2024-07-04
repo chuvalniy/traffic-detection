@@ -7,6 +7,7 @@ show_node:
   show_detection: False
   show_tracking: True
   snow_analytics: True
+  show_roi: True
 
 detection_node:
   device: 'cuda'
@@ -22,3 +23,6 @@ track_manager_node:
   buffer_analytics: 0.5
   min_lifetime_track: 3
   count_cars_buffer_frames: 25
+# [ 400, 105 ]
+analytics_node:
+  road_1: [ [ 180, 240 ], [ 233, 210 ], [ 625, 305 ], [625, 360]]

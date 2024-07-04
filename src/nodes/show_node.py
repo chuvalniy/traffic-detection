@@ -11,6 +11,7 @@ class ShowNode:
         self.show_detection = config['show_detection']
         self.show_tracking = config['show_tracking']
         self.show_analytics = config['snow_analytics']
+        self.show_roi = config['show_roi']
 
         # Параметры для шрифтов:
         self.fontFace = 1
@@ -48,7 +49,7 @@ class ShowNode:
         if self.show_analytics:
             info = frame_element.info
 
-            n_objects_text = f"Objects amount: {info['n_objects']}"
+            n_objects_text = f"Objects inside road: {info['n_objects_crossed_road']}"
 
             y = 55
             # Выводим текст для количества машин
@@ -57,9 +58,20 @@ class ShowNode:
                 text=n_objects_text,
                 org=(20, y),
                 fontFace=self.fontFace,
-                fontScale=self.fontScale*1.5,
+                fontScale=self.fontScale * 1.5,
                 thickness=self.thickness,
                 color=(255, 255, 255),
+            )
+
+        if self.show_roi:
+            # TODO: Add multiple roads support
+            road_1 = np.array(frame_element.roads_info, np.int32).reshape((-1, 1, 2))
+            cv2.polylines(
+                frame_result,
+                [road_1],
+                isClosed=True,
+                color=(0, 0, 255),
+                thickness=2
             )
 
         if self.imshow:
