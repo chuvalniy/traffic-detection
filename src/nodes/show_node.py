@@ -11,10 +11,11 @@ class ShowNode:
         self.show_detection = config['show_detection']
         self.show_tracking = config['show_tracking']
         self.show_analytics = config['snow_analytics']
+        self.show_roi = config['show_roi']
 
         # Параметры для шрифтов:
         self.fontFace = 1
-        self.fontScale = 2.0
+        self.fontScale = 1.0
         self.thickness = 2
 
     def process(self, frame_element: FrameElement):
@@ -47,20 +48,32 @@ class ShowNode:
 
         if self.show_analytics:
             info = frame_element.info
+            y = 35
+            for i, (k, v) in enumerate(info.items()):
+                y = y + (i * 20)
 
-            n_objects_text = f"Objects amount: {info['n_objects']}"
+                # Выводим текст для количества машин
+                n_objects_text = f"Objects inside {k}: {v}"
+                cv2.putText(
+                    frame_result,
+                    text=n_objects_text,
+                    org=(20, y),
+                    fontFace=self.fontFace,
+                    fontScale=self.fontScale * 1.5,
+                    thickness=self.thickness,
+                    color=(255, 255, 255),
+                )
 
-            y = 55
-            # Выводим текст для количества машин
-            cv2.putText(
-                frame_result,
-                text=n_objects_text,
-                org=(20, y),
-                fontFace=self.fontFace,
-                fontScale=self.fontScale*1.5,
-                thickness=self.thickness,
-                color=(255, 255, 255),
-            )
+        if self.show_roi:
+            for road in frame_element.roads_info:
+                road = np.array(road, np.int32).reshape((-1, 1, 2))
+                cv2.polylines(
+                    frame_result,
+                    [road],
+                    isClosed=True,
+                    color=(0, 0, 255),
+                    thickness=2
+                )
 
         if self.imshow:
             cv2.imshow(frame_element.source, frame_result)

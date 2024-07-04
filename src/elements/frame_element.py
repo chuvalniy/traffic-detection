@@ -13,6 +13,7 @@ class FrameElement:
             frame: np.ndarray,
             timestamp: float,
             frame_num: float,
+            roads_info: dict = None,
             buffer_tracks: dict = None,
             info: dict = None,
             id_list: Optional[list] = None,
@@ -24,6 +25,9 @@ class FrameElement:
         self.frame = frame
         self.timestamp = timestamp
         self.frame_num = frame_num
+
+        # Analytics
+        self.roads_info = roads_info
 
         # Detections
         self.conf = []
