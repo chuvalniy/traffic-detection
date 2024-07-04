@@ -8,7 +8,7 @@ class AnalyticsNode:
     """
 
     def __init__(self, config):
-        self.road_1 = config['road_1']
+        self.roads = [config[f'road_{i}'] for i in range(1, 100) if f'road_{i}' in config]
 
     def process(self, frame_element: FrameElement):
         if isinstance(frame_element, VideoEndBreakElement):
@@ -16,13 +16,15 @@ class AnalyticsNode:
         assert isinstance(
             frame_element, FrameElement
         ), f"{self.__name__} | Неправильный формат входного элемента {type(frame_element)}"
-        frame_element.roads_info = self.road_1
 
-        n_objects = len(frame_element.xyxy)
-        # TODO: Add logic: support of multiple roads
-        n_objects_crossed_road = self._process_road_intersection(frame_element, self.road_1)
+        # TODO: Надо перенести логику по инициализации дорог в другое место
+        frame_element.roads_info = self.roads.copy()
 
-        info = {'n_objects': n_objects, 'n_objects_crossed_road': n_objects_crossed_road}
+        info = {}
+        for i, road in enumerate(frame_element.roads_info):
+            n_objects_crossed_road = self._process_road_intersection(frame_element, road)
+            info[f'road_{i}'] = n_objects_crossed_road
+
         # TODO: Исправить на вариант с подсчетом количества треков вместо детекций
         frame_element.info = info
 
