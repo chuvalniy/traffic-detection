@@ -23,8 +23,7 @@ track_manager_node:
   buffer_analytics: 0.5
   min_lifetime_track: 3
   count_cars_buffer_frames: 25
-
-analytics_node:
   road_1: [ [ 156, 287 ], [ 184, 236 ], [ 284, 231 ], [ 300, 287 ] ]
   road_2: [ [ 330, 285 ], [ 352, 231 ], [ 453, 231 ], [ 480, 287 ] ]
   road_3: [ [ 100, 150 ], [ 136, 127 ], [ 77, 101 ], [ 59, 125 ] ]
+

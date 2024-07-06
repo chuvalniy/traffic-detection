@@ -40,17 +40,29 @@ class ShowNode:
                     thickness=self.thickness
                 )
 
+            # TODO: Fix using .tracked_xyxy instead of buffer_tracks
         if self.show_tracking:
-            for bbox in frame_element.tracked_xyxy:
+            for bbox, track_id in zip(frame_element.tracked_xyxy, frame_element.id_list):
                 x1, y1, x2, y2 = bbox
 
+                # Bounding box
                 cv2.rectangle(frame_result, (x1, y1), (x2, y2), (127, 127, 127), 3)
+
+                # Track id
+                cv2.putText(
+                    frame_result,
+                    text=f"id: {track_id}",
+                    org=(x1, y1 + 5),
+                    fontFace=self.fontFace,
+                    fontScale=self.fontScale,
+                    thickness=self.thickness,
+                    color=(0, 0, 255)
+                )
 
         if self.show_analytics:
             info = frame_element.info
-            y = 35
             for i, (k, v) in enumerate(info.items()):
-                y = y + (i * 20)
+                y = 35 + (i * 20)
 
                 # Выводим текст для количества машин
                 n_objects_text = f"Objects inside {k}: {v}"
